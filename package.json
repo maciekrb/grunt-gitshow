@@ -1,0 +1,54 @@
+{
+  "name": "grunt-gitshow",
+  "description": "Add git show output to files",
+  "version": "0.0.1",
+  "author": {
+    "name": "Maciek Ruckgaber"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maciekrb/grunt-gitshow"
+  },
+  "bugs": {
+    "url": "http://github.com/maciekrb/grunt-gitshow/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gruntjs/grunt-contrib-copy/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "chalk": "0.5.x",
+    "applause": "0.3.x"
+  },
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-clean": "0.6.x",
+    "grunt-contrib-internal": "0.4.x",
+    "grunt-contrib-jshint": "0.11.x",
+    "grunt-contrib-nodeunit": "0.4.x"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "git",
+    "show",
+    "replace"
+  ],
+  "files": [
+    "tasks"
+  ],
+  "contributors": [
+    {
+      "name": "Maciek Ruckgaber"
+    }
+  ],
+  "directories": {},
+  "readme": "ERROR: No README data found!"
+}
