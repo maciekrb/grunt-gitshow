@@ -1,7 +1,7 @@
 {
   "name": "grunt-gitshow",
   "description": "Add git show output to files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Maciek Ruckgaber"
   },
