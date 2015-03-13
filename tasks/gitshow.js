@@ -61,7 +61,6 @@ module.exports = function(grunt){
         };
 
         self.files.forEach(function (filePair) {
-          grunt.log.writeln(JSON.stringify(filePair));
           var dest = filePair.dest;
           isExpandedPair = filePair.orig.expand || false;
 
@@ -85,6 +84,7 @@ module.exports = function(grunt){
             }
           });
         });
+        grunt.log.writeln('Replaced git info in ' + chalk.cyan(tally.files) + ' files');
         done();
     });
 

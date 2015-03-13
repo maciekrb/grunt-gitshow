@@ -109,5 +109,6 @@ If matching type is `String` we use a simple variable lookup mechanism `@@string
 
 ## Release History
 
- * 2015-03-12    v0.0.2    `--quiet` option added to silence diff.
- * 2015-03-12    v0.0.1    First Released.
+  * 2015-03-12    v0.0.3    Improves task output
+  * 2015-03-12    v0.0.2    `--quiet` option added to silence diff.
+  * 2015-03-12    v0.0.1    First Released.
