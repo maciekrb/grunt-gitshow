@@ -26,15 +26,18 @@ module.exports = function(grunt){
       repo: './.git',
       format: '%h %an %aD',
       match: 'gitshow_version',
+      processContent: false,
+      processContentExclude: []
     });
 
-
+    options.repo = path.resolve(options.repo);
+    var self = this;
     grunt.util.spawn({
       cmd: 'git',
       args: [
         '--git-dir=' + options.repo, 
         'show', 
-        '--pretty="format:'+ options.format + '"']
+        '--pretty='+ options.format ]
       }, function(err, ver_info, stderr){
         if(err){
           grunt.log.error("git command failed: " + err);
@@ -44,29 +47,40 @@ module.exports = function(grunt){
         var applause_opts = {
           encoding: grunt.file.defaultEncoding,
           mode: false,
-          patterns: [{ match: options.match, replacement: ver_info }]
+          patterns: [{ match: options.match, replacement: ver_info.stdout }],
+          process: options.process || options.processContent,
+          noProcess: options.noProcess || options.processContentExclude
         };
 
         // create applause instance
         var applause = Applause.create(applause_opts);
-        var dest;
         var isExpandedPair;
+        var tally = {
+          files: 0
+        };
 
-        this.files.forEach(function (filePair) {
+        self.files.forEach(function (filePair) {
+          grunt.log.writeln(JSON.stringify(filePair));
+          var dest = filePair.dest;
           isExpandedPair = filePair.orig.expand || false;
+
           filePair.src.forEach(function (src) {
+            src = unixifyPath(src);
+            dest = unixifyPath(dest);
+
             if (detectDestType(filePair.dest) === 'directory') {
-              dest = (isExpandedPair) ? filePair.dest : unixifyPath(path.join(filePair.dest, src));
-            } else {
-              dest = filePair.dest;
-            }
+              dest = (isExpandedPair) ? dest : path.join(filePair.dest, src);
+            } 
+
             if (grunt.file.isDir(src)) {
               grunt.file.mkdir(dest);
             } else {
-              replace(src, dest, options, applause);
-              if (options.mode !== false) {
-                fs.chmodSync(dest, (options.mode === true) ? fs.lstatSync(src).mode : options.mode);
+              replace(src, dest, applause_opts, applause);
+              if (applause_opts.mode !== false) {
+                var m = (applause_opts.mode === true) ? fs.lstatSync(src).mode : applause_opts.mode;
+                fs.chmodSync(dest, m);
               }
+              tally.files++;
             }
           });
         });
