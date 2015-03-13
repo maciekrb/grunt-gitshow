@@ -85,6 +85,9 @@ Most commonly used options are:
   - `%B`: raw body (unwrapped subject and body)
   - `%N`: commit notes
 
+An ugly `%v` has been added to get the output of `git describe --tags` instead of the `git show` 
+executed otherwise.
+
 #### Match
 Type: `String|RegExp`
 Indicates the matching expression.
@@ -109,6 +112,7 @@ If matching type is `String` we use a simple variable lookup mechanism `@@string
 
 ## Release History
 
+  * 2015-03-13    v0.0.4    Adds `%v` format flag to print `git describe --tags`
   * 2015-03-12    v0.0.3    Improves task output
   * 2015-03-12    v0.0.2    `--quiet` option added to silence diff.
   * 2015-03-12    v0.0.1    First Released.

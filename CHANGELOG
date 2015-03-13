@@ -1,3 +1,18 @@
+v0.0.4
+	date: 2015-03-13    
+	changes: 
+		- Adds `%v` format flag to print `git describe --tags`
+
+v0.0.3    
+	date: 2015-03-12    
+	changes:
+		- Improves task output
+
+v0.0.2    
+	date: 2015-03-12    
+	changes:
+		- `--quiet` option added to silence diff.
+
 v0.0.1
 	date: 2015-03-12
 	changes:

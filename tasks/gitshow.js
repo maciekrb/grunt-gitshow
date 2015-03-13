@@ -30,16 +30,21 @@ module.exports = function(grunt){
       processContentExclude: []
     });
 
+    // Ugly hack to get the latest tag
+    var gitargs = ['--git-dir=' + options.repo];
+    if(options.format == "%v"){
+      gitargs = gitargs.concat(['describe', '--tags']);
+    } else {
+      gitargs = gitargs.concat(['show', '--quiet', '--pretty='+ options.format]);
+    }
+    grunt.log.writeln(JSON.stringify(gitargs));
+
     options.repo = path.resolve(options.repo);
     var self = this;
     grunt.util.spawn({
       cmd: 'git',
-      args: [
-        '--git-dir=' + options.repo, 
-        'show', 
-        '--quiet',
-        '--pretty='+ options.format ]
-      }, function(err, ver_info, stderr){
+      args: gitargs}, 
+      function(err, ver_info, stderr){
         if(err){
           grunt.log.error("git command failed: " + err);
           ver_info = "N/A";
